@@ -1,3 +1,6 @@
+mod auth;
+
+use auth::{handle_request, UserDatabase};
 use tokio::{
     io::{AsyncBufReadExt, AsyncWriteExt, BufReader},
     net::TcpListener,
