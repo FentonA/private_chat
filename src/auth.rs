@@ -9,10 +9,10 @@ type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync 
 
 struct UserDatabase {
     users: Vec<(String, String)>,
-}
+ }
 
 impl UserDatabase {}
-
+hi
 async fn handle_request() -> () {
     // let auth_header = req.headers().get(AUTHORIZATION);
     // match auth_header {
