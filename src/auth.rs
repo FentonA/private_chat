@@ -1,26 +1,26 @@
-use std::sync::Arc;
+use std::collections::HashMap;
+use bcrypt::{hash, verify, DEFAULT_COST};
 
-use hyper::header::{AUTHORIZATION, WWW_AUTHENTICATE};
-use hyper::http::HeaderValue;
-use hyper::{Body, Request, Response};
-use tokio::sync::RwLock;
-
-type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync + 'static>>;
-
-struct UserDatabase {
-    users: Vec<(String, String)>,
- }
-
-impl UserDatabase {}
-hi
-async fn handle_request() -> () {
-    // let auth_header = req.headers().get(AUTHORIZATION);
-    // match auth_header {
-    //     Some(header_value) => {}
-    //     None => Ok(Response::builder()),
-    // };
+pub struct User{
+    pub username: String,
+    pub password_hash: String,
 }
 
-// let auth_header = req.headers().get(AUTHORIZATION);
-//
-// match auth_header{};
+pub type Database = HashMap<String, User>;
+
+pub fn initialize_database()=> Database{
+
+    let mut database = HashMap::new();
+    let password_hash = hash("password", DEFAULT_COST).unwrap();
+    database.insert("user1", to_string(), User{username: "user1".to_string(), password_hash});
+    database
+}
+
+pub fn authenticate_user(username: &str, password: &str, database: &Database) -> Option<&User>{
+    if let Some(user) = database.get(username){
+        if verify(password, &user.password_hash).unwrap(){
+            return Some(user);
+        }
+    }
+    None
+}

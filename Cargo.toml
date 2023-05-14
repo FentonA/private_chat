@@ -6,5 +6,26 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-hyper = "0.14.24"
+yew = "0.19"
+wasm-bindgen = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+wasm-bindgen-futures = "0.4"
+futures = "0.3"
 tokio = { version = "1", features = ["full"] }
+tungstenite = "0.15"
+jsonwebtoken = "7.2.0"
+bcrypt = "0.10.1"
+sqlx = { version = "0.5", features = [
+  "runtime-tokio-rustls",
+  "postgres",
+  "json",
+] }
+dotenv = "0.15.0"
+
+[dependencies.web-sys]
+version = "0.3"
+features = ["console", "WebSocket"]
+
+[build-dependencies]
+wasm-bindgen-cli = "0.2"
